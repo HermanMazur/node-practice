@@ -63,11 +63,11 @@ const path = require('path');
 
 (async () => {
 try {
-    const data = await fs.readFile('./data.txt', 'utf8')
-    console.log(data)
+    const data = await fs.readFile('./package.json', 'utf8')
+    console.log(JSON.parse(data).dependencies)
     
-    const newContent = `${data} school`
-    await fs.writeFile('./data1.txt', newContent, 'utf8');
+    // const newContent = `${data} school`
+    // await fs.writeFile('./data1.txt', newContent, 'utf8');
 
     // await fs.rename ('./dataUtilsNewName', './tmp/dataUtilsNewName')
 
