@@ -25,11 +25,11 @@
 // const path = require('path');
 // console.log(path.resolve('dateUtils.js'))
 
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 
-const qwe = path.resolve('./qwe')
-const qwe1 = './qwe'
+// const qwe = path.resolve('./qwe')
+// const qwe1 = './qwe'
 
 // fs.readFile('./data.txt', 'utf8', (error, data) => {
 //     if (error) {
@@ -38,9 +38,45 @@ const qwe1 = './qwe'
 //     console.log(data)
 // })
 
-fs.readFile(path.resolve('./package.json'), 'utf8', (error, data) => {
-    if (error) {
-        console.error(error);
-    }
+
+// ассинхронность
+// fs.readFile(path.resolve('./package.json'), 'utf8', (error, data) => {
+//     if (error) {
+//         console.error(error);
+//     }
+//     console.log(data)
+// })
+
+// ссинхронное
+// const data = fs.readFileSync(path.resolve('./data.txt'), 'utf8')
+// console.log(data)
+//     console.log(12314563)
+
+const fs = require('fs').promises;
+const path = require('path');
+
+// fs.readFile(path.resolve('./data.txt'), 'utf8')
+//     .then(data => {
+//     console.log(data)
+//     })
+// .catch(err => console.log(err))
+
+(async () => {
+try {
+    const data = await fs.readFile('./data.txt', 'utf8')
     console.log(data)
-})
+    
+    const newContent = `${data} school`
+    await fs.writeFile('./data1.txt', newContent, 'utf8');
+
+    // await fs.rename ('./dataUtilsNewName', './tmp/dataUtilsNewName')
+
+    console.log(await fs.readdir('./tmp'));
+
+    // await fs.unlink('./tmp/dataUtilsNewName')
+    await fs.appendFile('./data1.txt', ' lecture', 'utf8')
+
+} catch (error) {
+    console.log(error)
+}
+})() 
